@@ -29,9 +29,9 @@ jobs:
     - name: Login to docker hub
       run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
     - name: Build Docker Image
-      run: docker build -t bobur7761/test_ci_cd .
+      run: docker build -t bobur7761/spring_session .
     - name: Publish Docker Image
-      run: docker push bobur7761/test_ci_cd:latest
+      run: docker push bobur7761/spring_session:latest
   deploy:
     needs: build
     runs-on: self-hosted
