@@ -38,6 +38,25 @@ jobs:
         run: docker build -t bobur7761/spring_session .
       - name: Publish Docker Image
         run: docker push bobur7761/spring_session:latest
+  dependency-submission:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    # Bog'liqlar uchun dependensiyalar grafigini yaratish va topshirish uchun, barcha loyihaning dependensiyalariga Dependabot xabarnomalarini yoqish.
+    # Ko'rish uchun: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
+    - name: Dependensiyalar grafikini yaratish va topshirish
+      uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+
   deploy:
     needs: build
     runs-on: self-hosted
