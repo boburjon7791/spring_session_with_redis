@@ -17,7 +17,7 @@ services:
     image: bobur7761/spring_session:latest
     container_name: spring_session-container
     ports:
-      - "8080:8080"
+      - "8090:8090"
     environment:
       # Redis configuration for Spring Boot
       SPRING_REDIS_HOST: redis
