@@ -32,6 +32,10 @@ public class SecurityConfig {
                     loginConfig.defaultSuccessUrl("/api/users");
                     loginConfig.failureForwardUrl("/");
                     loginConfig.permitAll();
+                    loginConfig.successHandler((request, response, authentication) -> {
+                        String sessionId = request.getSession().getId();
+                        redisTemplate.opsForValue().set("session",sessionId);
+                    });
                 })
                 .logout(
                 logoutConfigurer -> logoutConfigurer.logoutSuccessHandler((request, response, authentication) -> {
@@ -40,8 +44,8 @@ public class SecurityConfig {
                     logoutConfigurer.permitAll();
                     String sessionId = request.getSession().getId();
                     System.out.println("sessionId = " + sessionId);
-                    System.out.println("redisTemplate.delete(\"spring:session:sessions:\" + sessionId) = " + (redisTemplate.delete("spring:session:sessions:" + sessionId)));
-                    System.out.println("redisTemplate.delete(\"spring:session:sessions:expires:\" + sessionId) = " + (redisTemplate.delete("spring:session:sessions:expires:" + sessionId)));
+                    System.out.println("redisTemplate.delete(sessionId) = " + (redisTemplate.delete(sessionId)));
+                    System.out.println("redisTemplate.delete(sessionId) = " + (redisTemplate.delete(sessionId)));
                 })
         ).build();
     }
