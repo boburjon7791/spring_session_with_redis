@@ -35,7 +35,7 @@ public class SecurityConfig {
                     loginConfig.permitAll();
                     loginConfig.successHandler((request, response, authentication) -> {
                         String sessionId = request.getSession().getId();
-                        redisTemplate.opsForValue().set("session",sessionId);
+                        redisTemplate.opsForValue().set("session:"+sessionId,sessionId);
                     });
                 })
                 .build();

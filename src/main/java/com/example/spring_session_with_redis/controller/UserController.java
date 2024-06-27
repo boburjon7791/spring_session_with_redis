@@ -21,7 +21,7 @@ public class UserController {
     }
     @GetMapping("/logout")
     public String logout(HttpServletRequest request){
-        System.out.println("(redisTemplate.delete(request.getSession().getId())) = " + (redisTemplate.delete(request.getSession().getId())));
+        System.out.println("(redisTemplate.delete(request.getSession().getId())) = " + (redisTemplate.delete("session:"+request.getSession().getId())));
         return "success logout";
     }
 }
