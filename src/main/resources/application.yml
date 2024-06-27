@@ -1,11 +1,12 @@
 spring:
     application:
         name: spring_session_with_redis
+#    security
     security:
         user:
             name: user
             password: 123
-
+#    redis
     data:
         redis:
             host: redis
