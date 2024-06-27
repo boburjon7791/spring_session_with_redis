@@ -1,5 +1,9 @@
 spring:
     application:
         name: spring_session_with_redis
+    security:
+        user:
+            name: user
+            password: 123
 server:
     port: 8090
