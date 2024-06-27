@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .logout(
                 logoutConfigurer -> logoutConfigurer.logoutSuccessHandler((request, response, authentication) -> {
                     logoutConfigurer.deleteCookies("JSESSIONID");
-                    logoutConfigurer.logoutSuccessUrl("/login");
+                    logoutConfigurer.logoutSuccessUrl("/");
                     logoutConfigurer.permitAll();
                     String sessionId = request.getSession().getId();
                     System.out.println("sessionId = " + sessionId);
