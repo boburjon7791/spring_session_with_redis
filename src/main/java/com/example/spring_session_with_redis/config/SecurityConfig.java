@@ -41,10 +41,6 @@ public class SecurityConfig {
                     loginConfig.defaultSuccessUrl("/api/users");
                     loginConfig.failureForwardUrl("/");
                     loginConfig.permitAll();
-                    loginConfig.successHandler((request, response, authentication) -> {
-                        String sessionId = request.getSession().getId();
-                        redisTemplate.opsForValue().set("session:"+sessionId,sessionId);
-                    });
                 })
                 .addFilterBefore(oncePerRequestFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
