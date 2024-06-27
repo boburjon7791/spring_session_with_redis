@@ -34,7 +34,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(httpRequests->{
-                    httpRequests.requestMatchers("/api/users/logout").permitAll();
+                    httpRequests.requestMatchers("/login").permitAll();
                     httpRequests.anyRequest().authenticated();
                 })
                 .build();
