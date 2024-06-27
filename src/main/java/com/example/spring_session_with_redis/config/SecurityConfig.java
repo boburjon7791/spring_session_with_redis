@@ -29,7 +29,7 @@ public class SecurityConfig {
                     httpRequests.anyRequest().authenticated();
                 })
                 .formLogin(loginConfig ->{
-                    loginConfig.successForwardUrl("/api/users");
+                    loginConfig.defaultSuccessUrl("/api/users");
                     loginConfig.failureForwardUrl("/");
                     loginConfig.permitAll();
                 })
