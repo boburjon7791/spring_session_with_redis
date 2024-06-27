@@ -37,6 +37,11 @@ public class SecurityConfig {
                     httpRequests.requestMatchers("/login").permitAll();
                     httpRequests.anyRequest().authenticated();
                 })
+                .formLogin(formLogin -> {
+                    formLogin.defaultSuccessUrl("/");
+                    formLogin.permitAll();
+                    formLogin.failureForwardUrl("/");
+                })
                 .build();
     }
     @Bean
