@@ -1,0 +1,5 @@
+spring:
+    application:
+        name: spring_session_with_redis
+server:
+    port: 8090

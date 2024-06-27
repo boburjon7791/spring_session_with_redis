@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  redis:
+    restart: always
+    image: redis:latest
+    container_name: redis_container
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+
+  app:
+    restart: always
+    image: bobur7761/spring_session:latest
+    container_name: spring_session-container
+    ports:
+      - "8080:8080"
+    environment:
+      # Redis configuration for Spring Boot
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+    networks:
+      - app-network
+
+volumes:
+  redis_data:
+
+networks:
+  app-network:
