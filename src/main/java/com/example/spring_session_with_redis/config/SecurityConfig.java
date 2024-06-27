@@ -39,6 +39,7 @@ public class SecurityConfig {
                     logoutConfigurer.logoutSuccessUrl("/login");
                     logoutConfigurer.permitAll();
                     String sessionId = request.getSession().getId();
+                    System.out.println("sessionId = " + sessionId);
                     redisTemplate.delete("spring:session:sessions:" + sessionId);
                     redisTemplate.delete("spring:session:sessions:expires:" + sessionId);
                 })
