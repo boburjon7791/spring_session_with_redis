@@ -26,6 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(httpRequests->{
+                    httpRequests.requestMatchers("/api/users/logout").permitAll();
                     httpRequests.anyRequest().authenticated();
                 })
                 .formLogin(loginConfig ->{
@@ -37,16 +38,6 @@ public class SecurityConfig {
                         redisTemplate.opsForValue().set("session",sessionId);
                     });
                 })
-                .logout(
-                logoutConfigurer -> logoutConfigurer.logoutSuccessHandler((request, response, authentication) -> {
-                    logoutConfigurer.deleteCookies("JSESSIONID");
-                    logoutConfigurer.logoutSuccessUrl("/");
-                    logoutConfigurer.permitAll();
-                    String sessionId = request.getSession().getId();
-                    System.out.println("sessionId = " + sessionId);
-                    System.out.println("redisTemplate.delete(sessionId) = " + (redisTemplate.delete(sessionId)));
-                    System.out.println("redisTemplate.delete(sessionId) = " + (redisTemplate.delete(sessionId)));
-                })
-        ).build();
+                .build();
     }
 }
