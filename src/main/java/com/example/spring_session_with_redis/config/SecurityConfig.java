@@ -40,8 +40,8 @@ public class SecurityConfig {
                     logoutConfigurer.permitAll();
                     String sessionId = request.getSession().getId();
                     System.out.println("sessionId = " + sessionId);
-                    redisTemplate.delete("spring:session:sessions:" + sessionId);
-                    redisTemplate.delete("spring:session:sessions:expires:" + sessionId);
+                    System.out.println("redisTemplate.delete(\"spring:session:sessions:\" + sessionId) = " + (redisTemplate.delete("spring:session:sessions:" + sessionId)));
+                    System.out.println("redisTemplate.delete(\"spring:session:sessions:expires:\" + sessionId) = " + (redisTemplate.delete("spring:session:sessions:expires:" + sessionId)));
                 })
         ).build();
     }
