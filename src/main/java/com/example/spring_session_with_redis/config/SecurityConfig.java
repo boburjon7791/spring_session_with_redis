@@ -30,7 +30,7 @@ public class SecurityConfig {
                 })
                 .formLogin(loginConfig ->{
                     loginConfig.successForwardUrl("/api/users");
-                    loginConfig.failureForwardUrl("/login");
+                    loginConfig.failureForwardUrl("/");
                     loginConfig.permitAll();
                 })
                 .logout(
