@@ -37,12 +37,6 @@ public class SecurityConfig {
                     httpRequests.requestMatchers("/api/users/logout").permitAll();
                     httpRequests.anyRequest().authenticated();
                 })
-                .formLogin(loginConfig ->{
-                    loginConfig.defaultSuccessUrl("/api/users");
-                    loginConfig.failureForwardUrl("/");
-                    loginConfig.permitAll();
-                })
-                .addFilterBefore(oncePerRequestFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
     @Bean
