@@ -22,7 +22,7 @@ public class UserController {
         String sessionId = request.getSession().getId();
         System.out.println("sessionId = " + sessionId);
         redisTemplate.opsForValue().set("session:"+ sessionId, sessionId);
-        return "redirect:/api/users";
+        return "hello login";
     }
     @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
@@ -30,7 +30,7 @@ public class UserController {
         System.out.println("sessionId = " + sessionId);
         Boolean delete = redisTemplate.delete("session:" + sessionId);
         System.out.println("delete = " + delete);
-        return "redirect:/login";
+        return "hello logout";
     }
 
     @GetMapping
