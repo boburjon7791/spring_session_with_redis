@@ -41,6 +41,7 @@ public class SecurityConfig {
                 })
                 .formLogin(formLogin -> {
                     formLogin.loginPage("/login");
+                    formLogin.permitAll();
                     formLogin.defaultSuccessUrl("/api/users");
                     formLogin.failureForwardUrl("/login");
                 })
