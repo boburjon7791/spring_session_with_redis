@@ -36,11 +36,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(httpRequests->{
+                    httpRequests.requestMatchers("/login").permitAll();
                     httpRequests.anyRequest().authenticated();
                 })
                 .formLogin(formLogin -> {
                     formLogin.loginPage("/login");
-                    formLogin.permitAll(true);
                     formLogin.defaultSuccessUrl("/api/users");
                     formLogin.failureForwardUrl("/login");
                 })
