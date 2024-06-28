@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -34,36 +35,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(httpRequests->{
-                    httpRequests.requestMatchers(
-                            "/login",
-                            "/api/users/**"
-                    ).permitAll();
                     httpRequests.anyRequest().authenticated();
                 })
                 .formLogin(formLogin -> {
-                    formLogin.defaultSuccessUrl("/");
-                    formLogin.permitAll();
-                    formLogin.failureForwardUrl("/");
+                    formLogin.loginPage("/login");
+                    formLogin.permitAll(true);
+                    formLogin.defaultSuccessUrl("/api/users");
+                    formLogin.failureForwardUrl("/login");
                 })
-                .logout(logoutConfig -> {
-                    logoutConfig.logoutSuccessUrl("/login");
-                    logoutConfig.logoutUrl("/api/users/logout");
+                .logout(logout -> {
+                    logout.logoutSuccessUrl("/login");
+                    logout.deleteCookies("JSESSIONID");
+                    logout.logoutUrl("/logout");
                 })
                 .build();
-    }
-    @Bean
-    public OncePerRequestFilter oncePerRequestFilter() {
-        return new OncePerRequestFilter() {
-
-            @Override
-            protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-                if (request.getRequestURI().equals("/logout")) {
-                    redisTemplate.delete("spring:session:sessions:"+request.getSession().getId());
-                }
-                filterChain.doFilter(request, response);
-            }
-        };
     }
 }

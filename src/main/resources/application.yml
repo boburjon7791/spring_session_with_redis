@@ -1,6 +1,6 @@
 spring:
     session:
-      store-type: redis
+        store-type: redis
     application:
         name: spring_session_with_redis
 #    security
@@ -8,6 +8,11 @@ spring:
         user:
             name: user
             password: 123
+    cache:
+        type: redis
+        redis:
+            cache-null-values: false
+            time-to-live: 60
 #    redis
     data:
         redis:
