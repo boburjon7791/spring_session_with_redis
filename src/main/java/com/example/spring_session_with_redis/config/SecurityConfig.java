@@ -47,6 +47,10 @@ public class SecurityConfig {
                     formLogin.permitAll();
                     formLogin.failureForwardUrl("/");
                 })
+                .logout(logoutConfig -> {
+                    logoutConfig.logoutSuccessUrl("/logint");
+                    logoutConfig.logoutUrl("/api/users/logout");
+                })
                 .build();
     }
     @Bean
