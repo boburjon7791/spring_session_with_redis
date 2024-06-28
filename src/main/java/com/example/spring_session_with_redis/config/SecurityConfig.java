@@ -16,10 +16,21 @@ public class SecurityConfig {
                     httpRequests.requestMatchers("/login").permitAll();
                     httpRequests.anyRequest().authenticated();
                 })
+                /**
+                 * While any request will be send to the server, backend saves all session ids to the redis database.
+                 */
                 .formLogin(formLogin -> {
                     formLogin.defaultSuccessUrl("/");
                     formLogin.permitAll();
                     formLogin.failureForwardUrl("/");
+                })
+                /**
+                 * If a client sends logout request, client's session id will be removed from the redis database automatically.
+                 */
+                .logout(logoutConfig -> {
+                    logoutConfig.permitAll();
+                    logoutConfig.logoutSuccessUrl("/login");
+                    logoutConfig.deleteCookies("JSESSIONID");
                 })
                 .build();
     }
