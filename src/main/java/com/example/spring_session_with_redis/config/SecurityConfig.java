@@ -22,7 +22,6 @@ public class SecurityConfig {
                 .formLogin(formLogin -> {
                     formLogin.defaultSuccessUrl("/");
                     formLogin.permitAll();
-                    formLogin.failureForwardUrl("/");
                 })
                 /**
                  * If a client sends logout request, client's session id will be removed from the redis database automatically.
