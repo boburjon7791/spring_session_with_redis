@@ -48,7 +48,7 @@ public class SecurityConfig {
                     formLogin.failureForwardUrl("/");
                 })
                 .logout(logoutConfig -> {
-                    logoutConfig.logoutSuccessUrl("/logint");
+                    logoutConfig.logoutSuccessUrl("/login");
                     logoutConfig.logoutUrl("/api/users/logout");
                 })
                 .build();
