@@ -11,7 +11,7 @@ spring:
 #    redis
     cache:
         redis:
-            time-to-live: 86400
+            time-to-live: 60
     data:
         redis:
             host: redis
