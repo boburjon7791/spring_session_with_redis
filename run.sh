@@ -1,3 +1,7 @@
+
+# chmod +x deploy.sh
+# ./deploy.sh
+
 #!/bin/bash
 
 # Java dasturini build qilish
