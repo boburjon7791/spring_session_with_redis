@@ -1,6 +1,6 @@
 
-# chmod +x deploy.sh
-# ./deploy.sh
+# chmod +x run.sh
+# ./run.sh
 
 #!/bin/bash
 
