@@ -30,6 +30,7 @@ public class SpringSessionWithRedisApplication {
     }
 	@Scheduled(cron = "0 * * * * *")
 	public void init(){
+		System.out.println("cron job is working");
 		cacheManager.getCacheNames().forEach(session -> {
 			Objects.requireNonNull(cacheManager.getCache(session)).evictIfPresent(session);
 			System.out.println("session = " + session);
