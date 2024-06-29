@@ -23,4 +23,4 @@ docker-compose down
 docker-compose pull
 
 # Docker Compose servisini ishga tushirish
-docker-compose up -d
+docker-compose up
