@@ -1,5 +1,6 @@
 package com.example.spring_session_with_redis;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.CacheManager;
@@ -16,10 +17,6 @@ import java.util.Objects;
 @SpringBootApplication
 @EnableCaching
 public class SpringSessionWithRedisApplication {
-	private final CacheManager cacheManager;
-    public SpringSessionWithRedisApplication(CacheManager cacheManager) {
-        this.cacheManager = cacheManager;
-    }
 
     public static void main(String[] args) {
 		SpringApplication.run(SpringSessionWithRedisApplication.class, args);
@@ -28,12 +25,5 @@ public class SpringSessionWithRedisApplication {
 	public String index() {
         return "hello";
     }
-	@Scheduled(cron = "0 * * * * *")
-	public void init(){
-		System.out.println("cron job is working");
-		cacheManager.getCacheNames().forEach(session -> {
-			Objects.requireNonNull(cacheManager.getCache(session)).evictIfPresent(session);
-			System.out.println("session = " + session);
-		});
-	}
+
 }
