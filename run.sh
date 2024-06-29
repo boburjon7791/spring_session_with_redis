@@ -8,7 +8,7 @@
 ./gradlew clean build -x test
 
 # Docker login
-docker login -u bobur7761 -p bobur7761
+docker login -u username -p password
 
 # Docker image'ni yaratish
 docker build -t bobur7761/spring_session .
