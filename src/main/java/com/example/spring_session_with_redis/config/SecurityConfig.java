@@ -31,6 +31,10 @@ public class SecurityConfig {
                     logoutConfig.logoutSuccessUrl("/login");
                     logoutConfig.deleteCookies("JSESSIONID");
                 })
+                .rememberMe(rememberMeConfig -> {
+                    rememberMeConfig.alwaysRemember(true);
+                    rememberMeConfig.tokenValiditySeconds(60*60*24);
+                })
                 .build();
     }
 }
