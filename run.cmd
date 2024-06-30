@@ -4,7 +4,7 @@ REM Java dasturini build qilish
 call gradlew clean build -x test
 
 REM Docker login
-docker login -u username -p password
+REM docker login -u username -p password
 
 REM Docker image'ni yaratish
 docker build -t bobur7761/spring_session .
